@@ -21,7 +21,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className={styles.card}>
             <Link href={`/product/${product.id}`} className={styles.imageWrapper}>
                 {product.image ? (
-                    <img src={product.image} alt={product.name} className={styles.productImage} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${product.image}`} alt={product.name} className={styles.productImage} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
                     <div className={styles.imagePlaceholder} />
                 )}

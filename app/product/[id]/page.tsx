@@ -3,6 +3,16 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/Button';
 import { ProductActions } from '@/components/ProductActions';
 
+export function generateStaticParams() {
+    return [
+        { id: '1' },
+        { id: '2' },
+        { id: '3' },
+        { id: '4' },
+        { id: '5' },
+    ];
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
@@ -43,7 +53,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         overflow: 'hidden'
                     }}>
                         {product.image ? (
-                            <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${product.image}`} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : (
                             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)' }}></div>
                         )}
