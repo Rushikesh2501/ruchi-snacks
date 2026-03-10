@@ -38,7 +38,7 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.bottom}>
-                    <p>© {new Date().getFullYear()} Ruchi Snacks. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Ruchi Snacks. All rights reserved. | Developed by Rushikesh Jagtap</p>
                 </div>
             </div>
         </footer>
