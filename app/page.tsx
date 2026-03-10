@@ -1,66 +1,96 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ProductCard from '@/components/ProductCard';
+// import CategoryCard from '@/components/CategoryCard';
+import { Button } from '@/components/ui/Button';
+import styles from '@/styles/Home.module.css';
+import { useRouter } from 'next/navigation';
+
+const FEATURED_PRODUCTS = [
+  { id: '1', name: 'Premium Banana Chips', price: 250, category: 'Namkeen', image: '/products/banana-chips.png' },
+  { id: '2', name: 'Premium Bhakarwadi', price: 250, category: 'Namkeen', image: '/products/bhakarwadi.png' },
+  { id: '3', name: 'Royal Kesar Peda', price: 400, category: 'Sweets', image: '/products/peda.png' },
+  { id: '4', name: 'Spicy Chakli', price: 180, category: 'Namkeen', image: '/products/chakli.png' },
+  { id: '5', name: 'Ghee Mysore Pak', price: 350, category: 'Sweets', image: '/products/mysore-pak.png' },
+];
+
+const CATEGORIES = [
+  { id: 'namkeen', name: 'Namkeen', image: '/products/namkeen-cat.png' },
+  { id: 'sweets', name: 'Sweets', image: '/products/peda.png' },
+  { id: 'gifting', name: 'Gifting', image: '/products/bhakarwadi.png' },
+];
 
 export default function Home() {
+  const router = useRouter();
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      <Navbar />
+
+      {/* Hero */}
+      <section className={styles.hero}>
+        <div className="container">
+          <div className={styles.heroContent}>
+            <span className={styles.label}>Est. 1995</span>
+            <h1 className={styles.heroTitle}>
+              Taste the <span className={styles.textGradient}>Tradition</span>
+            </h1>
+            <p className={styles.heroDesc}>
+              Handcrafted Indian snacks made with authentic recipes and premium ingredients.
+              Experience the crunch of joy in every bite.
+            </p>
+            <div className={styles.heroActions}>
+              <Button size="lg" onClick={() => router.push('/shop')}>Shop Now</Button>
+              <Button size="lg" variant="outline">Our Story</Button>
+            </div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className={styles.heroBackground} />
+      </section>
+
+      {/* Categories */}
+      {/* <section className={styles.section}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>Explore Collections</h2>
+          <div className={styles.categoryGrid}>
+            {CATEGORIES.map(cat => (
+              <CategoryCard key={cat.id} category={cat} />
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section> */}
+
+      {/* Featured */}
+      <section className={styles.section}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Trending Delights</h2>
+            <Button variant="ghost">View All Products →</Button>
+          </div>
+          <div className={styles.productGrid}>
+            {FEATURED_PRODUCTS.map(p => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter / CTA */}
+      <section className={styles.ctaSection}>
+        <div className="container">
+          <div className={styles.ctaCard}>
+            <h2>Join the Family</h2>
+            <p>Subscribe for exclusive offers and new flavor drops.</p>
+            <div className={styles.ctaForm}>
+              <input type="email" placeholder="Enter your email" className={styles.input} />
+              <Button>Subscribe</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }
